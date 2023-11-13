@@ -107,13 +107,15 @@ void HandleClient(int socket)
             sleep(1);
             sem_wait(fullC);
             sem_wait(mutexC);
-
-            char size = readSize;
+            printf("1");
+            char size;
             read(pipe, &size, 1);
             char name[size];
             read(pipe, name, size);
-            send(socket, name, size, 0);
+            printf("2");
+            send(socket, name, strlen(name), 0);
             sem_post(mutexC);
+            printf("3");
             sem_post(emptyC);
         }
     }

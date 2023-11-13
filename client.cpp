@@ -423,7 +423,7 @@ int main( int t_narg, char **t_args )
             if (wait == 0)
             {
                 int i = rand() % 200;
-                write(l_sock_server,names[i],sizeof(names[i]));
+                write(l_sock_server,names[i],strlen(names[i]));
             }
 
         }
@@ -450,17 +450,17 @@ int main( int t_narg, char **t_args )
         if (strncmp("WAIT",l_buf,strlen("WAIT"))==0)
         {
             wait = 1;
+            printf("WAIT\n");
         }
         if (strncmp("NOWAIT",l_buf,strlen("NOWAIT"))==0)
         {
             wait = 0;
+            printf("NOWAIT\n");
         }
 
         if (type_chosen && (strncmp(client_type.c_str(),"SPOTREBA", strlen( "SPOTREBA" )))== 0)
         {
-            l_len = write( STDOUT_FILENO, l_buf, l_len );
-            if ( l_len < 0 )
-                log_msg( LOG_ERROR, "Unable to write to stdout." );
+            printf("Name: %s\n", l_buf);
             write( l_sock_server, ack.c_str(), strlen(ack.c_str()) );
         }
 
