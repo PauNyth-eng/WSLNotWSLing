@@ -422,8 +422,9 @@ int main( int t_narg, char **t_args )
         {
             if (wait == 0)
             {
-                int i = rand() % 200;
-                write(l_sock_server,names[i],strlen(names[i]));
+                const char* name = names[rand() % 200];
+                int size = strlen(name);
+                write(l_sock_server,name, size);
             }
 
         }
